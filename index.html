@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,21 +12,28 @@
     <!-- https://api.openbrewerydb.org/ -->
     <title>GitPub</title>
 </head>
-<body>
-    <header></header>
 
-    <main class="bg-indigo-500 flex columns-2 sm;columns-1">
-        <div id="search-bar-area">
-            <form id="searchbar">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+<body>
+    <header class="flex m-4">
+        <h1 class="text-4xl font-bold">GitPub</h1>
+    </header>
+
+    <main class="flex flex-wrap justify-evenly">
+        <div class="m-8 basis-1 w-full m:w-2/5" id="search-bar-area">
+            <h2 class="text-2xl font-bold">Search for Breweries</h2>
+
+            <form class="flex flex-col justify-evenly min-w-full" id="searchbar">
+                <label for="city">City:</label>
+                <textarea class="rounded-md" name="city" id="city" placeholder="City" required autofocus></textarea>
                 <label for="states">State:</label>
-                <select name="state" id="state">
+                <select class="rounded-md" name="state" id="state" required>
                     <option value="alabama">Alabama</option>
                     <option value="alaska">Alaska</option>
                     <option value="arkansas">Arkansas</option>
                     <option value="california">California</option>
                     <option value="colorado">Colorado</option>
                     <option value="delaware">Delaware</option>
+                    <option value="district_of_columbia">District of Columbia</option>
                     <option value="florida">Florida</option>
                     <option value="georgia">Georgia</option>
                     <option value="hawaii">Hawaii</option>
@@ -38,22 +46,52 @@
                     <option value="maine">Maine</option>
                     <option value="maryland">Maryland</option>
                     <option value="massachusetts">Massachusetts</option>
+                    <option value="michigan">Michigan</option>
+                    <option value="minnesota">Minnesota</option>
+                    <option value="mississippi">Mississippi</option>
+                    <option value="missouri">Missouri</option>
+                    <option value="montana">Montana</option>
+                    <option value="nebraska">Nebraska</option>
+                    <option value="nevada">Nevada</option>
+                    <option value="new_hampshire">New Hampshire</option>
+                    <option value="new_jersey">New Jersey</option>
+                    <option value="new_mexico">New Mexico</option>
+                    <option value="new_york">New York</option>
+                    <option value="north_carolina">North Carolina</option>
+                    <option value="north_dakota">North Dakota</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="oklahoma">Oklahoma</option>
+                    <option value="oregon">Oregon</option>
+                    <option value="pennsylvania">Pennsylvania</option>
+                    <option value="rhode_island">Rhode Island</option>
+                    <option value="south_carolina">South Carolina</option>
+                    <option value="tennessee">Tennessee</option>
+                    <option value="texas">Texas</option>
+                    <option value="utah">Utah</option>
+                    <option value="vermont">Vermont</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="washington">Washington</option>
+                    <option value="west_virginia">West Virginia</option>
+                    <option value="wisconsin">Wisconsin</option>
+                    <option value="wyoming">Wyoming</option>
                 </select>
-                <button id="randombullshitgo" class="rounded-md bg-slate">This is a button that does stuff</button>
+                <button id="search" class="rounded-md bg-slate">Search</button>
             </form>
-            
+
         </div>
-        <div id="journal-container">
-            <form id="journal-1">
+        <div class="flex flex-col m-8 basis-1 min-w-[50%]" id="journal-container">
+            <h2 class="text-2xl font-bold">My Trips:</h2>
+            <div class="flex flex-col mt-4 w-full border-solid border-green-400 border-2 rounded-md" id="journal-1">
                 <!-- to become <p> that changes on click for editing and dynamic generation purposes-->
-                <textarea id="brewery" placeholder="brewery"></textarea>
-                <textarea id="date" placeholder="MM/DD/YYYY" autocomplete="off"></textarea>
-                <textarea id="journalentry"></textarea>
-            </form>
+                <p class="rounded m-auto" >Brewery</p>
+                <p class="rounded m-auto">MM/DD/YYYY</p>
+                <p class="rounded m-auto">Journal entry</p>
+            </div>
         </div>
     </main>
     <footer></footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./assets/js/script.js"></script>
+
 </html>
