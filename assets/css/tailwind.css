@@ -16,7 +16,7 @@
   /* 2 */
   border-style: solid;
   /* 2 */
-  border-color: #e5e7eb;
+  border-color: currentColor;
   /* 2 */
 }
 
@@ -476,8 +476,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 2rem;
 }
 
-.m-auto {
-  margin: auto;
+.m-2 {
+  margin: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .mt-4 {
@@ -500,8 +504,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: 50%;
 }
 
+.max-w-fit {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
 .basis-1 {
   flex-basis: 0.25rem;
+}
+
+.resize-none {
+  resize: none;
 }
 
 .flex-col {
@@ -532,9 +550,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-style: solid;
 }
 
-.border-green-400 {
+.border-dark-gray {
   --tw-border-opacity: 1;
-  border-color: rgb(74 222 128 / var(--tw-border-opacity));
+  border-color: rgb(36 35 49 / var(--tw-border-opacity));
+}
+
+.bg-flax {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 202 125 / var(--tw-bg-opacity));
+}
+
+.bg-golden-brown {
+  --tw-bg-opacity: 1;
+  background-color: rgb(162 112 53 / var(--tw-bg-opacity));
+}
+
+.bg-camel {
+  --tw-bg-opacity: 1;
+  background-color: rgb(184 139 74 / var(--tw-bg-opacity));
 }
 
 .text-4xl {
@@ -549,4 +582,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-bold {
   font-weight: 700;
+}
+
+.hover\:bg-coffee:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(83 62 45 / var(--tw-bg-opacity));
 }

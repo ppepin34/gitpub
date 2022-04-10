@@ -10,20 +10,20 @@
     <title>GitPub</title>
 </head>
 
-<body>
+<body class="bg-flax">
     <header class="flex m-4">
         <h1 class="text-4xl font-bold">GitPub</h1>
     </header>
 
     <main class="flex flex-wrap justify-evenly">
-        <div class="m-8 basis-1 w-full m:w-2/5" id="search-bar-area">
+        <div class="m-8 basis-1 w-full border-2 border-dark-gray rounded-md min-w-1/3" id="search-bar-area">
             <h2 class="text-2xl font-bold">Search for Breweries</h2>
 
-            <form class="flex flex-col justify-evenly min-w-full" id="searchbar">
+            <form class="flex flex-col justify-evenly min-w-full m-2" id="location-search">
                 <label for="city">City:</label>
-                <textarea class="rounded-md" name="city" id="city" placeholder="City" required autofocus></textarea>
+                <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="city" id="city" placeholder="City" required autofocus></textarea>
                 <label for="states">State:</label>
-                <select class="rounded-md" name="state" id="state" required>
+                <select class="border-2 border-dark-gray rounded-md max-w-fit" name="state" id="state" required>
                     <option value="alabama">Alabama</option>
                     <option value="alaska">Alaska</option>
                     <option value="arkansas">Arkansas</option>
@@ -72,17 +72,22 @@
                     <option value="wisconsin">Wisconsin</option>
                     <option value="wyoming">Wyoming</option>
                 </select>
-                <button id="search" class="rounded-md bg-slate">Search</button>
+                <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee" id="search-place">Search</button>
+            </form>
+
+            <form class="flex flex-col justify-evenly min-w-full m-2" id="brewery-search">
+                <label for="brewery">Brewery:</label>
+                <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="brewery" id="brewery" placeholder="Brewery" required></textarea>
+                <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee" id="search-brewery">Search</button>
             </form>
 
         </div>
         <div class="flex flex-col m-8 basis-1 min-w-[50%]" id="journal-container">
             <h2 class="text-2xl font-bold">My Trips:</h2>
-            <div class="flex flex-col mt-4 w-full border-solid border-green-400 border-2 rounded-md" id="journal-1">
-                <!-- to become <p> that changes on click for editing and dynamic generation purposes-->
-                <p class="rounded m-auto" >Brewery</p>
-                <p class="rounded m-auto">MM/DD/YYYY</p>
-                <p class="rounded m-auto">Journal entry</p>
+            <div class="flex flex-col mt-4 w-full border-solid border-dark-gray border-2 rounded-md" id="journal-1">
+                <p class="rounded border-2 border-dark-gray m-2 bg-camel" >Brewery</p>
+                <p class="rounded border-2 border-dark-gray m-2 bg-camel">MM/DD/YYYY</p>
+                <p class="rounded border-2 border-dark-gray m-2 bg-camel">Journal entry</p>
             </div>
         </div>
     </main>
