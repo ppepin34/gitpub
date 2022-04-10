@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <link rel="stylesheet" href="./assets/css/tailwind.css">
     <!-- https://api.openbrewerydb.org/ -->
     <title>GitPub</title>
@@ -21,9 +25,14 @@
 
             <form class="flex flex-col justify-evenly min-w-full m-2" id="location-search">
                 <label for="city">City:</label>
-                <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="city" id="city" placeholder="City" required autofocus></textarea>
+                <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="city" id="city"
+                    placeholder="City" required autofocus></textarea>
                 <label for="states">State:</label>
-                <select class="border-2 border-dark-gray rounded-md max-w-fit" name="state" id="state" required>
+                <select class="form-select appearance-none
+                bg-white bg-clip-padding bg-no-repeat
+                border-2 border-dark-gray rounded-md
+                max-w-fit
+                active: max-h-screen" name="state" id="state" :active="size = 5" required>
                     <option value="alabama">Alabama</option>
                     <option value="alaska">Alaska</option>
                     <option value="arkansas">Arkansas</option>
@@ -72,27 +81,118 @@
                     <option value="wisconsin">Wisconsin</option>
                     <option value="wyoming">Wyoming</option>
                 </select>
-                <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee" id="search-place">Search</button>
+                <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee"
+                    id="search-place">Search</button>
             </form>
 
             <form class="flex flex-col justify-evenly min-w-full m-2" id="brewery-search">
                 <label for="brewery">Brewery:</label>
-                <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="brewery" id="brewery" placeholder="Brewery" required></textarea>
-                <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee" id="search-brewery">Search</button>
+                <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="brewery" id="brewery"
+                    placeholder="Brewery" required></textarea>
+                <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee"
+                    id="search-brewery">Search</button>
             </form>
 
         </div>
         <div class="flex flex-col m-8 basis-1 min-w-[50%]" id="journal-container">
             <h2 class="text-2xl font-bold">My Trips:</h2>
             <div class="flex flex-col mt-4 w-full border-solid border-dark-gray border-2 rounded-md" id="journal-1">
-                <p class="rounded border-2 border-dark-gray m-2 bg-camel" >Brewery</p>
-                <p class="rounded border-2 border-dark-gray m-2 bg-camel">MM/DD/YYYY</p>
-                <p class="rounded border-2 border-dark-gray m-2 bg-camel">Journal entry</p>
+                <div class="accordion-item bg-white border border-gray-200">
+                    <h2 class="accordion-header mb-0" id="headingOne">
+                        <button class="
+                          accordion-button
+                          relative
+                          flex
+                          items-center
+                          w-full
+                          py-4
+                          px-5
+                          text-base text-gray-800 text-left
+                          bg-white
+                          border-0
+                          rounded-none
+                          transition
+                          focus:outline-none
+                        " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                            aria-controls="collapseOne">
+                            Brewery
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body py-4 px-5">
+                            <p class="rounded border-2 border-dark-gray m-2 bg-camel">MM/DD/YYYY</p>
+                            <p class="rounded border-2 border-dark-gray m-2 bg-camel">Journal entry</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+        </div>
+        </div>
+        </div>
+
     </main>
+    <button type="button"
+        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+        data-bs-toggle="modal" data-bs-target="#locationSearch">
+        Vertically centered scrollable modal
+    </button>
+    </div>
+
+    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+        id="locationSearch" tabindex="-1" aria-labelledby="locationSearch" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+            <div
+                class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <div
+                    class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                    <h5 class="text-xl font-medium leading-normal text-gray-800" id="locationsSearchLabel">
+                        Modal title
+                    </h5>
+                    <button type="button"
+                        class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                        data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body relative p-4">
+                    <div class="flex justify-center">
+                        <div class="bg-white rounded-lg border border-gray-200 w-96 text-gray-900">
+                            <button aria-current="true" type="button" class="
+                          text-left
+                          px-6
+                          py-2
+                          border-b border-gray-200
+                          w-full
+                          rounded-lg
+                          bg-coffee
+                          cursor-pointer
+                        ">
+                                The current link item
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    <button type="button"
+                        class="inline-block px-6 py-2.5 bg-dark-gray text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button"
+                        class="inline-block px-6 py-2.5 bg-dark-gray text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                        Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer></footer>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./assets/js/script.js"></script>
 
