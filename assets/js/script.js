@@ -1,15 +1,41 @@
-var listStuff = function () {
-    var apiURL = "https://api.openbrewerydb.org/breweries?by_city=richmond&by_state=virginia"
-    fetch(apiURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data)
-            });
-        } else {
-            alert("Error you bastard")
-        }
-    })
-}
+// locationSearchModal
+const locationSearchModalTarget = document.getElementById("locationSearchModal");
+
+// options with default values
+const optionsLocSearchMod = {
+    placement: 'center-center',
+    backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+    onHide: () => {
+        console.log('modal is hidden');
+    },
+    onShow: () => {
+        console.log('modal is shown');
+    },
+    onToggle: () => {
+        console.log('modal has been toggled');
+    }
+};
+
+const locationSearchModal = new Modal(locationSearchModalTarget, optionsLocSearchMod);
+
+// script to dismiss locationSearchError
+const locationSearchError = document.getElementById('locationSearchError');
+
+// options object
+const optionsLocErr = {
+    triggerEl: document.getElementById('triggerElement'),
+    transition: 'transition-opacity',
+    duration: 1000,
+    timing: 'ease-out',
+};
+
+const dismissLocErr = new Dismiss(locationSearchError, optionsLocErr);
+
+var modalExit = function() {
+    locationSearchModal.hide()
+}; 
+
+document.getElementById("locBtn").addEventListener("click", modalExit);
 
 // search for breweries in a city and state
 $("#location-search").submit(function (event) {
@@ -38,18 +64,19 @@ $("#location-search").submit(function (event) {
 
                 // if data = null, return error
                 if (data.length === 0) {
-                    console.log("No breweries found")
+                    $("#locationSearchError").show();
                 }
                 // else log data
                 else {
                     console.log(data)
+                    locationSearchModal.show();
                 }
-                });    
-        }
+            });
+        };
     })
 
-    // response fails
-    .catch(function (error) {
-        alert("Unable to connect to the database");
-    });
-})
+        // response fails
+        .catch(function (error) {
+            alert("Unable to connect to the database");
+        });
+});

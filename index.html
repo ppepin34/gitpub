@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
     <link rel="stylesheet" href="./assets/css/tailwind.css">
     <!-- https://api.openbrewerydb.org/ -->
     <title>GitPub</title>
@@ -20,9 +17,12 @@
     </header>
 
     <main class="flex flex-wrap justify-evenly">
+
+        <!-- search bars -->
         <div class="m-8 basis-1 w-full border-2 border-dark-gray rounded-md min-w-1/3" id="search-bar-area">
             <h2 class="text-2xl font-bold">Search for Breweries</h2>
 
+            <!-- search by location -->
             <form class="flex flex-col justify-evenly min-w-full m-2" id="location-search">
                 <label for="city">City:</label>
                 <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="city" id="city"
@@ -85,114 +85,143 @@
                     id="search-place">Search</button>
             </form>
 
-            <form class="flex flex-col justify-evenly min-w-full m-2" id="brewery-search">
+            <!-- search for brewery -->
+            <!-- <form class="flex flex-col justify-evenly min-w-full m-2" id="brewery-search">
                 <label for="brewery">Brewery:</label>
                 <textarea class="border-2 border-dark-gray rounded-md max-w-fit resize-none" name="brewery" id="brewery"
                     placeholder="Brewery" required></textarea>
                 <button class="rounded-md border-2 border-dark-gray mt-2 max-w-fit bg-golden-brown hover:bg-coffee"
                     id="search-brewery">Search</button>
-            </form>
-
+            </form> -->
         </div>
-        <div class="flex flex-col m-8 basis-1 min-w-[50%]" id="journal-container">
-            <h2 class="text-2xl font-bold">My Trips:</h2>
-            <div class="flex flex-col mt-4 w-full border-solid border-dark-gray border-2 rounded-md" id="journal-1">
-                <div class="accordion-item bg-white border border-gray-200">
-                    <h2 class="accordion-header mb-0" id="headingOne">
-                        <button class="
-                          accordion-button
-                          relative
-                          flex
-                          items-center
-                          w-full
-                          py-4
-                          px-5
-                          text-base text-gray-800 text-left
-                          bg-white
-                          border-0
-                          rounded-none
-                          transition
-                          focus:outline-none
-                        " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                            aria-controls="collapseOne">
-                            Brewery
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body py-4 px-5">
-                            <p class="rounded border-2 border-dark-gray m-2 bg-camel">MM/DD/YYYY</p>
-                            <p class="rounded border-2 border-dark-gray m-2 bg-camel">Journal entry</p>
-                        </div>
+
+        <!-- accordions for journal entries -->
+        <div class="flex flex-col m-8 basis-1 min-w-[50%]" id="journalContainer">
+            <h2 class="text-4xl font-bold mb-3">My Brewery Trips:</h2>
+            <div id="accordion-collapse" data-accordion="collapse">
+                <h3 id="accordion-collapse-heading-1">
+                    <button type="button"
+                        class="flex justify-between items-center p-5 w-full font-medium text-left text-gray-500 rounded-t-xl border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
+                        aria-controls="accordion-collapse-body-1">
+                        <span>Headers go here</span>
+                        <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </h3>
+                <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     </div>
                 </div>
+                <h3 id="accordion-collapse-heading-2">
+                    <button type="button"
+                        class="flex justify-between items-center p-5 w-full font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        data-accordion-target="#accordion-collapse-body-2" aria-expanded="false"
+                        aria-controls="accordion-collapse-body-2">
 
+                        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </h3>
+                <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+
+                    </div>
+                </div>
+                <h3 id="accordion-collapse-heading-3">
+                    <button type="button"
+                        class="flex justify-between items-center p-5 w-full font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        data-accordion-target="#accordion-collapse-body-3" aria-expanded="false"
+                        aria-controls="accordion-collapse-body-3">
+
+                        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </h3>
+                <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                    <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
-        </div>
+
         </div>
 
     </main>
-    <button type="button"
-        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-        data-bs-toggle="modal" data-bs-target="#locationSearch">
-        Vertically centered scrollable modal
-    </button>
-    </div>
 
-    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-        id="locationSearch" tabindex="-1" aria-labelledby="locationSearch" aria-modal="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
-            <div
-                class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                <div
-                    class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                    <h5 class="text-xl font-medium leading-normal text-gray-800" id="locationsSearchLabel">
-                        Modal title
-                    </h5>
-                    <button type="button"
-                        class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                        data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="modal-body relative p-4">
-                    <div class="flex justify-center">
-                        <div class="bg-white rounded-lg border border-gray-200 w-96 text-gray-900">
-                            <button aria-current="true" type="button" class="
-                          text-left
-                          px-6
-                          py-2
-                          border-b border-gray-200
-                          w-full
-                          rounded-lg
-                          bg-coffee
-                          cursor-pointer
-                        ">
-                                The current link item
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                    <button type="button"
-                        class="inline-block px-6 py-2.5 bg-dark-gray text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
-                        data-bs-dismiss="modal">
-                        Close
+    <!-- modal for location search results -->
+    <div id="locationSearchModal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+
+                    </h3>
+                    <button type="button" id="locBtn"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="locationSearchModal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
                     </button>
-                    <button type="button"
-                        class="inline-block px-6 py-2.5 bg-dark-gray text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
-                        Save changes
-                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- toast for city search failure-->
+    <div id="locationSearchError"
+        class="hidden absolute flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg top-5 right-5 shadow dark:text-gray-400 dark:bg-gray-800"
+        role="alert">
+        <div
+            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </div>
+        <div class="ml-3 text-sm font-normal">Error searching by city.</div>
+        <button type="button"
+            class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            data-dismiss-target="#locationSearchError" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </button>
     </div>
 
     <footer></footer>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./assets/js/script.js"></script>
 
