@@ -1,3 +1,6 @@
+// container for search modal
+var breweryContainerEl = document.getElementById("brewery-container")
+
 // locationSearchModal
 const locationSearchModalTarget = document.getElementById("locationSearchModal");
 
@@ -31,11 +34,51 @@ const optionsLocErr = {
 
 const dismissLocErr = new Dismiss(locationSearchError, optionsLocErr);
 
-var modalExit = function() {
+var modalExit = function () {
     locationSearchModal.hide()
-}; 
+};
 
 document.getElementById("locBtn").addEventListener("click", modalExit);
+
+// display list of breweries in modal
+var displayBreweries = function (breweries) {
+    
+    // clear old content
+    breweryContainerEl.textContent = "";
+
+
+    // loop over breweries
+    for (var i = 0; i < breweries.length; i++) {
+
+        // create container for each brewery
+        var breweryEl = document.createElement("div");
+
+        // create header for brewery
+        var header = document.createElement("h4");
+        header.textContent = breweries[i].name;
+
+        // create address for brewery
+        var address = document.createElement("p");
+        address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
+
+        // type of brewery
+        var type = document.createElement("p");
+        type.textContent = breweries[i].brewery_type
+
+        // create link for website
+        var website = document.createElement("a");
+        website.setAttribute("href", breweries[i].website_url);
+        website.setAttribute("target", "_blank")
+        website.textContent = breweries[i].website_url;
+
+        breweryEl.appendChild(header);
+        breweryEl.appendChild(type);
+        breweryEl.appendChild(address);
+        breweryEl.appendChild(website);
+
+        breweryContainerEl.appendChild(breweryEl)
+    };
+};
 
 // search for breweries in a city and state
 $("#location-search").submit(function (event) {
@@ -68,8 +111,9 @@ $("#location-search").submit(function (event) {
                 }
                 // else log data
                 else {
-                    console.log(data)
                     locationSearchModal.show();
+                    displayBreweries(data);
+                    console.log(data);
                 }
             });
         };
