@@ -60,6 +60,11 @@ var displayBreweries = function (breweries) {
         // create address for brewery
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
+        address.addClass("address");
+
+        //function display directions (attached to event listener on direction buttons)
+        // var directions = document.querySelector(".address")
+        // directions => positionstack fetch
 
         // type of brewery
         var type = document.createElement("p");
@@ -71,10 +76,20 @@ var displayBreweries = function (breweries) {
         website.setAttribute("target", "_blank")
         website.textContent = breweries[i].website_url;
 
+        // create button element to send to journal
+        var button = document.createElement("button");
+        button.innerHTML = "Click here to add";
+
+        // create button button to go to directions
+        var direction = document.createElement("button");
+        direction.innerHTML = "Click here for directions";
+
         breweryEl.appendChild(header);
         breweryEl.appendChild(type);
         breweryEl.appendChild(address);
         breweryEl.appendChild(website);
+        breweryEl.appendChild(button);
+        breweryEl.appendChild(direction);
 
         breweryContainerEl.appendChild(breweryEl)
     };
