@@ -60,11 +60,18 @@ var displayBreweries = function (breweries) {
         // create address for brewery
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
-        address.addClass("address");
+        // var positionAddress = address;
+        // console.log(positionAddress);
 
         //function display directions (attached to event listener on direction buttons)
         // var directions = document.querySelector(".address")
         // directions => positionstack fetch
+        // HD code here
+
+    
+        
+
+        
 
         // type of brewery
         var type = document.createElement("p");
@@ -83,6 +90,12 @@ var displayBreweries = function (breweries) {
         // create button button to go to directions
         var direction = document.createElement("button");
         direction.innerHTML = "Click here for directions";
+        // add function to go to new URL for directions
+        $(direction).click(function(){
+            window.open('http://google.com');
+            });
+
+
 
         breweryEl.appendChild(header);
         breweryEl.appendChild(type);
@@ -140,4 +153,3 @@ $("#location-search").submit(function (event) {
         });
 });
 
-// test for positionstack github
