@@ -139,3 +139,5 @@ $("#location-search").submit(function (event) {
             alert("Unable to connect to the database");
         });
 });
+
+// test for positionstack github
