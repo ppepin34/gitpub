@@ -2,50 +2,12 @@
 var breweryContainerEl = document.getElementById("brewery-container");
 var journalContainerEl = document.getElementById("journalContainer");
 
-// locationSearchModal
-const locationSearchModalTarget = document.getElementById("locationSearchModal");
-
-// options with default values
-const optionsLocSearchMod = {
-    placement: 'center-center',
-    backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-    onHide: () => {
-        console.log('modal is hidden');
-    },
-    onShow: () => {
-        console.log('modal is shown');
-    },
-    onToggle: () => {
-        console.log('modal has been toggled');
-    }
-};
-
-const locationSearchModal = new Modal(locationSearchModalTarget, optionsLocSearchMod);
-
-// script to dismiss locationSearchError
-const locationSearchError = document.getElementById('locationSearchError');
-
-// options object
-const optionsLocErr = {
-    triggerEl: document.getElementById('triggerElement'),
-    transition: 'transition-opacity',
-    duration: 1000,
-    timing: 'ease-out',
-};
-
-const dismissLocErr = new Dismiss(locationSearchError, optionsLocErr);
-
-//
-var locModalExit = function () {
-    locationSearchModal.hide()
-};
-
 // create Journal entry
-var createJournal = function(brewery) {
+var createJournal = function (brewery) {
 
     // create list item
     var journalEl = document.createElement("li");
-    
+
     // create header
     var journalHeader = document.createElement("h3");
     journalHeader.textContent = brewery;
@@ -70,13 +32,23 @@ var createJournal = function(brewery) {
     locationSearchModal.hide();
 };
 
-var editJournalEntry = function(){
+var editJournalEntry = function () {
     console.log("span was clicked")
 }
 
 
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
+
+    // initialize modal
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
+    // show modal
+    var modal = M.Modal.getInstance($(".modal"))
+
+    modal.open();
 
     // clear old content
     breweryContainerEl.textContent = "";
@@ -97,11 +69,6 @@ var displayBreweries = function (breweries) {
         address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
         // + ", " + breweries[i].postal_code;
         address.classList.add("address");
-
-        //function display directions (attached to event listener on direction buttons)
-        // var directions = document.querySelector(".address")
-        // directions => positionstack fetch
-
 
         // type of brewery
         var type = document.createElement("p");
@@ -126,8 +93,9 @@ var displayBreweries = function (breweries) {
 
         // pass directions
         document.querySelectorAll('.directionBtn').forEach(item => {
-        console.log})
- 
+            console.log
+        })
+
 
         // append to modal
         breweryEl.appendChild(header);
@@ -140,10 +108,10 @@ var displayBreweries = function (breweries) {
         breweryContainerEl.appendChild(breweryEl)
     };
 
-    $(".breweryBtn").click(function(e){
+    $(".breweryBtn").click(function (e) {
         var breweryThis = e.target.previousSibling.previousSibling.previousSibling.previousSibling.textContent;
         createJournal(breweryThis);
-  });
+    });
     $(".button").click(function (e) {
         // var textAddress = $(".address")[0].innerHTML;
         var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
@@ -152,7 +120,7 @@ var displayBreweries = function (breweries) {
         $.ajax({
             url: 'https://api.positionstack.com/v1/forward',
             data: {
-                access_key: '3c901a01e99403584073b5175537c705', 
+                access_key: '3c901a01e99403584073b5175537c705',
                 query: breweryAddress,
                 limit: 1,
             }
@@ -162,7 +130,7 @@ var displayBreweries = function (breweries) {
             console.log(dataArray);
             var addressInfo = dataArray[0];
             console.log(addressInfo);
-            var mapURL= addressInfo[0].map_url;
+            var mapURL = addressInfo[0].map_url;
             console.log(mapURL);
             window.open(mapURL)
         });
@@ -214,12 +182,18 @@ $("#location-search").submit(function (event) {
 });
 
 // edit journal entries
-$(".date").on("click", function() {
+$(".date").on("click", function () {
     console.log("<span> was clicked");
-  });
+});
+
+$(document).ready(function () {
+    $('select').formSelect();
+});
 
 // event listenr for location search modal journal entries
 document.getElementsByClassName(".address")
 
-// event listener for location search modal exit button
-document.getElementById("locBtn").addEventListener("click", locModalExit);
+// init select
+$(document).ready(function() {
+    $('select').material_select();
+ });
