@@ -60,7 +60,8 @@ var displayBreweries = function (breweries) {
 
         // create address for brewery
         var address = document.createElement("p");
-        address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
+        address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
+        // + ", " + breweries[i].postal_code;
         address.classList.add("address");
         
         //function display directions (attached to event listener on direction buttons)
@@ -121,11 +122,26 @@ var displayBreweries = function (breweries) {
         breweryContainerEl.appendChild(breweryEl)
     };
 
-    $(".button").click(function(e){
+        $(".button").click(function(e){
         // var textAddress = $(".address")[0].innerHTML;
-        var addressThis = e.target.previousSibling.previousSibling.previousSibling.textContent;
-        console.log(addressThis);
-  });
+            var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
+            console.log(breweryAddress);
+
+        
+        // var positionURL = "http://api.positionstack.com/v1/forward?access_key=fe9062a43bed87567973d5d3b281b8eaquery=" + "breweryAddress";
+
+        $.ajax({
+            url: 'api.positionstack.com/v1/forward',
+            data: {
+              access_key: 'fe9062a43bed87567973d5d3b281b8ea',
+              query: 'breweryAddress',
+              limit: 1
+            }
+          }).done(function(data) {
+            console.log(JSON.parse(data));
+          });
+
+        });
 
 };
 
