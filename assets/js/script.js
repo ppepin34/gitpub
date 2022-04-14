@@ -45,17 +45,17 @@ var createJournal = function(brewery) {
 
     // create list item
     var journalEl = document.createElement("li");
-
+    
     // create header
     var journalHeader = document.createElement("h3");
     journalHeader.textContent = brewery;
 
     // create date
-    var date = document.createElement("span");
+    var date = document.createElement("p");
     date.textContent = "Enter a Date";
 
     // create journal content
-    var journalContent = document.createElement("p");
+    var journalContent = document.createElement("span");
     journalContent.textContent = "Tell us what you think about " + brewery;
 
     // append children to li
@@ -67,7 +67,12 @@ var createJournal = function(brewery) {
     journalContainerEl.appendChild(journalEl)
 
     locationSearchModal.hide();
+};
+
+var editJournalEntry = function(){
+    console.log("span was clicked")
 }
+
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
 
@@ -176,6 +181,10 @@ $("#location-search").submit(function (event) {
         });
 });
 
+// edit journal entries
+$("li").on("click", function() {
+    console.log("<span> was clicked");
+  });
 
 // event listenr for location search modal journal entries
 document.getElementsByClassName(".address")
