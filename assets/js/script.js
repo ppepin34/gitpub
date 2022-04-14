@@ -68,8 +68,6 @@ var displayBreweries = function (breweries) {
         // directions => positionstack fetch
     
         
-        
-
         // type of brewery
         var type = document.createElement("p");
         type.textContent = breweries[i].brewery_type
@@ -106,10 +104,6 @@ var displayBreweries = function (breweries) {
         //     });
         // });
    
-
-       
-
-         
           
           //  window.open('http://google.com');
              // window.open('http://google.com');
