@@ -128,22 +128,35 @@ var displayBreweries = function (breweries) {
             console.log(breweryAddress);
 
         
-        // var positionURL = "http://api.positionstack.com/v1/forward?access_key=fe9062a43bed87567973d5d3b281b8eaquery=" + "breweryAddress";
+        var positionURL = "http://api.positionstack.com/v1/forward?access_key=3c901a01e99403584073b5175537c705" + "query=" + breweryAddress;
+
 
         $.ajax({
-            url: 'api.positionstack.com/v1/forward',
+            url: 'https://api.positionstack.com/v1/forward',
             data: {
-              access_key: 'fe9062a43bed87567973d5d3b281b8ea',
-              query: 'breweryAddress',
+              access_key: '3c901a01e99403584073b5175537c705',
+              query: breweryAddress,
               limit: 1
             }
           }).done(function(data) {
-            console.log(JSON.parse(data));
+            console.log(data);
           });
-
-        });
-
+    });
 };
+
+        // $.ajax({
+        //     url: 'https://api.positionstack.com/v1/forward',
+        //     data: {
+        //       access_key: 'fe9062a43bed87567973d5d3b281b8ea',
+        //       query: '1600 Pennsylvania Ave NW - Washington',
+        //       limit: 1
+        //     }
+        //   }).done(function(data) {
+        //     console.log(JSON.parse(data));
+        //     window.open(map_url);
+        //   });
+
+        // });
 
 // search for breweries in a city and state
 $("#location-search").submit(function (event) {
