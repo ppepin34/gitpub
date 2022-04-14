@@ -43,7 +43,7 @@ document.getElementById("locBtn").addEventListener("click", modalExit);
 
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
-    
+
     // clear old content
     breweryContainerEl.textContent = "";
 
@@ -63,12 +63,12 @@ var displayBreweries = function (breweries) {
         address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
         // + ", " + breweries[i].postal_code;
         address.classList.add("address");
-        
+
         //function display directions (attached to event listener on direction buttons)
         // var directions = document.querySelector(".address")
         // directions => positionstack fetch
-    
-        
+
+
         // type of brewery
         var type = document.createElement("p");
         type.textContent = breweries[i].brewery_type
@@ -88,28 +88,11 @@ var displayBreweries = function (breweries) {
         direction.classList.add("button");
         direction.innerHTML = "Click here for directions";
 
-  
 
-        // add function to go to new URL for directions
-        // document.querySelectorAll(".position").forEach(item => {
-        //     item.addEventListener("click", event => {
-        //         // var address = eventTarget.prevUntil(".address")
-        //         console.log(address);
-        //     });
+        //  window.open('http://google.com');
+        // window.open('http://google.com');
+        // console.log(this.latitude);
         // });
-
-        
-        // $(direction).ready(function(){
-        //     $(direction).click(function(event){
-        //         alert("you've clicked this brewery: " + event.target.nodeName + ",class: ");
-        //     });
-        // });
-   
-          
-          //  window.open('http://google.com');
-             // window.open('http://google.com');
-             // console.log(this.latitude);
-             // });
 
 
         breweryEl.appendChild(header);
@@ -122,41 +105,30 @@ var displayBreweries = function (breweries) {
         breweryContainerEl.appendChild(breweryEl)
     };
 
-        $(".button").click(function(e){
+    $(".button").click(function (e) {
         // var textAddress = $(".address")[0].innerHTML;
-            var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
-            console.log(breweryAddress);
-
-        
-        var positionURL = "http://api.positionstack.com/v1/forward?access_key=3c901a01e99403584073b5175537c705" + "query=" + breweryAddress;
-
+        var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
+        console.log(breweryAddress);
 
         $.ajax({
             url: 'https://api.positionstack.com/v1/forward',
             data: {
-              access_key: '3c901a01e99403584073b5175537c705',
-              query: breweryAddress,
-              limit: 1
+                access_key: '3c901a01e99403584073b5175537c705',
+                query: breweryAddress,
+                limit: 1,
             }
-          }).done(function(data) {
-            console.log(data);
-          });
+        }).done(function (data) {
+            console.log(Object.keys(data));
+            var dataArray = Object.values(data);
+            console.log(dataArray);
+            var addressInfo = dataArray[0];
+            console.log(addressInfo);
+            var mapURL= addressInfo[0].map_url;
+            console.log(mapURL);
+            window.open(mapURL)
+        });
     });
 };
-
-        // $.ajax({
-        //     url: 'https://api.positionstack.com/v1/forward',
-        //     data: {
-        //       access_key: 'fe9062a43bed87567973d5d3b281b8ea',
-        //       query: '1600 Pennsylvania Ave NW - Washington',
-        //       limit: 1
-        //     }
-        //   }).done(function(data) {
-        //     console.log(JSON.parse(data));
-        //     window.open(map_url);
-        //   });
-
-        // });
 
 // search for breweries in a city and state
 $("#location-search").submit(function (event) {
