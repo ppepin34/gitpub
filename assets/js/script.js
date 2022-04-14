@@ -1,5 +1,6 @@
 // container for search modal
-var breweryContainerEl = document.getElementById("brewery-container")
+var breweryContainerEl = document.getElementById("brewery-container");
+var journalContainerEl = document.getElementById("journalContainer");
 
 // locationSearchModal
 const locationSearchModalTarget = document.getElementById("locationSearchModal");
@@ -39,6 +40,34 @@ var locModalExit = function () {
     locationSearchModal.hide()
 };
 
+// create Journal entry
+var createJournal = function(brewery) {
+
+    // create list item
+    var journalEl = document.createElement("li");
+
+    // create header
+    var journalHeader = document.createElement("h3");
+    journalHeader.textContent = brewery;
+
+    // create date
+    var date = document.createElement("span");
+    date.textContent = "Enter a Date";
+
+    // create journal content
+    var journalContent = document.createElement("p");
+    journalContent.textContent = "Tell us what you think about " + brewery;
+
+    // append children to li
+    journalEl.appendChild(journalHeader);
+    journalEl.appendChild(date);
+    journalEl.appendChild(journalContent)
+
+    // append journal entry to container
+    journalContainerEl.appendChild(journalEl)
+
+    locationSearchModal.hide();
+}
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
 
@@ -60,10 +89,6 @@ var displayBreweries = function (breweries) {
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
         address.classList.add("address");
-
-        //function display directions (attached to event listener on direction buttons)
-        // var directions = document.querySelector(".address")
-        // directions => positionstack fetch
 
         // type of brewery
         var type = document.createElement("p");
@@ -103,7 +128,7 @@ var displayBreweries = function (breweries) {
 
     $(".breweryBtn").click(function(e){
         var breweryThis = e.target.previousSibling.previousSibling.previousSibling.previousSibling.textContent;
-        console.log(breweryThis);
+        createJournal(breweryThis);
   });
 };
 
