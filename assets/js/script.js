@@ -34,11 +34,10 @@ const optionsLocErr = {
 
 const dismissLocErr = new Dismiss(locationSearchError, optionsLocErr);
 
-var modalExit = function () {
+//
+var locModalExit = function () {
     locationSearchModal.hide()
 };
-
-document.getElementById("locBtn").addEventListener("click", modalExit);
 
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
@@ -84,6 +83,7 @@ var displayBreweries = function (breweries) {
         var direction = document.createElement("button");
         direction.innerHTML = "Click here for directions";
 
+        // append to modal
         breweryEl.appendChild(header);
         breweryEl.appendChild(type);
         breweryEl.appendChild(address);
@@ -102,7 +102,6 @@ $("#location-search").submit(function (event) {
     event.preventDefault();
 
     // get info from form
-
     var city = ($("#city").val());
 
     var state = ($("#state").val());
@@ -139,3 +138,10 @@ $("#location-search").submit(function (event) {
             alert("Unable to connect to the database");
         });
 });
+
+
+// event listenr for location search modal journal entries
+
+
+// event listener for location search modal exit button
+document.getElementById("locBtn").addEventListener("click", locModalExit);
