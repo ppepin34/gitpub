@@ -73,6 +73,7 @@ var editJournalEntry = function(){
     console.log("span was clicked")
 }
 
+
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
 
@@ -92,8 +93,14 @@ var displayBreweries = function (breweries) {
 
         // create address for brewery
         var address = document.createElement("p");
-        address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
+        address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
+        // + ", " + breweries[i].postal_code;
         address.classList.add("address");
+
+        //function display directions (attached to event listener on direction buttons)
+        // var directions = document.querySelector(".address")
+        // directions => positionstack fetch
+
 
         // type of brewery
         var type = document.createElement("p");
@@ -112,6 +119,7 @@ var displayBreweries = function (breweries) {
 
         // create button button to go to directions
         var direction = document.createElement("button");
+        direction.classList.add("button");
         direction.innerHTML = "Click here for directions";
         direction.classList.add("directionBtn")
 
@@ -135,6 +143,29 @@ var displayBreweries = function (breweries) {
         var breweryThis = e.target.previousSibling.previousSibling.previousSibling.previousSibling.textContent;
         createJournal(breweryThis);
   });
+    $(".button").click(function (e) {
+        // var textAddress = $(".address")[0].innerHTML;
+        var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
+        console.log(breweryAddress);
+
+        $.ajax({
+            url: 'https://api.positionstack.com/v1/forward',
+            data: {
+                access_key: '3c901a01e99403584073b5175537c705', 
+                query: breweryAddress,
+                limit: 1,
+            }
+        }).done(function (data) {
+            console.log(Object.keys(data));
+            var dataArray = Object.values(data);
+            console.log(dataArray);
+            var addressInfo = dataArray[0];
+            console.log(addressInfo);
+            var mapURL= addressInfo[0].map_url;
+            console.log(mapURL);
+            window.open(mapURL)
+        });
+    });
 };
 
 // search for breweries in a city and state
