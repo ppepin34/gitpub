@@ -41,7 +41,7 @@ var locModalExit = function () {
 
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
-    
+
     // clear old content
     breweryContainerEl.textContent = "";
 
@@ -50,7 +50,7 @@ var displayBreweries = function (breweries) {
     for (var i = 0; i < breweries.length; i++) {
 
         // create container for each brewery
-        var breweryEl = document.createElement("div");
+        var breweryEl = document.createElement("li");
 
         // create header for brewery
         var header = document.createElement("h4");
@@ -59,7 +59,7 @@ var displayBreweries = function (breweries) {
         // create address for brewery
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
-        address.addClass("address");
+        address.classList.add("address");
 
         //function display directions (attached to event listener on direction buttons)
         // var directions = document.querySelector(".address")
@@ -78,10 +78,17 @@ var displayBreweries = function (breweries) {
         // create button element to send to journal
         var button = document.createElement("button");
         button.innerHTML = "Click here to add";
+        button.classList.add("breweryBtn")
 
         // create button button to go to directions
         var direction = document.createElement("button");
         direction.innerHTML = "Click here for directions";
+        direction.classList.add("directionBtn")
+
+        // pass directions
+        document.querySelectorAll('.directionBtn').forEach(item => {
+        console.log})
+ 
 
         // append to modal
         breweryEl.appendChild(header);
@@ -93,6 +100,11 @@ var displayBreweries = function (breweries) {
 
         breweryContainerEl.appendChild(breweryEl)
     };
+
+    $(".breweryBtn").click(function(e){
+        var breweryThis = e.target.previousSibling.previousSibling.previousSibling.previousSibling.textContent;
+        console.log(breweryThis);
+  });
 };
 
 // search for breweries in a city and state
@@ -141,7 +153,7 @@ $("#location-search").submit(function (event) {
 
 
 // event listenr for location search modal journal entries
-
+document.getElementsByClassName(".address")
 
 // event listener for location search modal exit button
 document.getElementById("locBtn").addEventListener("click", locModalExit);
