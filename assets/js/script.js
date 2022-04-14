@@ -53,6 +53,7 @@ var createJournal = function(brewery) {
     // create date
     var date = document.createElement("p");
     date.textContent = "Enter a Date";
+    date.classList.add("date")
 
     // create journal content
     var journalContent = document.createElement("span");
@@ -213,7 +214,7 @@ $("#location-search").submit(function (event) {
 });
 
 // edit journal entries
-$("li").on("click", function() {
+$(".date").on("click", function() {
     console.log("<span> was clicked");
   });
 
