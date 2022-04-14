@@ -40,6 +40,7 @@ var modalExit = function () {
 
 document.getElementById("locBtn").addEventListener("click", modalExit);
 
+
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
     
@@ -60,17 +61,13 @@ var displayBreweries = function (breweries) {
         // create address for brewery
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + "<br>" + breweries[i].city + " " + breweries[i].state + ", " + breweries[i].postal_code;
-        // var positionAddress = address;
-        // console.log(positionAddress);
-
+        address.classList.add("address");
+        
         //function display directions (attached to event listener on direction buttons)
         // var directions = document.querySelector(".address")
         // directions => positionstack fetch
-        // HD code here
-
     
         
-
         
 
         // type of brewery
@@ -89,12 +86,35 @@ var displayBreweries = function (breweries) {
 
         // create button button to go to directions
         var direction = document.createElement("button");
+        direction.classList.add("button");
         direction.innerHTML = "Click here for directions";
-        // add function to go to new URL for directions
-        $(direction).click(function(){
-            window.open('http://google.com');
-            });
 
+  
+
+        // add function to go to new URL for directions
+        // document.querySelectorAll(".position").forEach(item => {
+        //     item.addEventListener("click", event => {
+        //         // var address = eventTarget.prevUntil(".address")
+        //         console.log(address);
+        //     });
+        // });
+
+        
+        // $(direction).ready(function(){
+        //     $(direction).click(function(event){
+        //         alert("you've clicked this brewery: " + event.target.nodeName + ",class: ");
+        //     });
+        // });
+   
+
+       
+
+         
+          
+          //  window.open('http://google.com');
+             // window.open('http://google.com');
+             // console.log(this.latitude);
+             // });
 
 
         breweryEl.appendChild(header);
@@ -106,6 +126,13 @@ var displayBreweries = function (breweries) {
 
         breweryContainerEl.appendChild(breweryEl)
     };
+
+    $(".button").click(function(e){
+        // var textAddress = $(".address")[0].innerHTML;
+        var addressThis = e.target.previousSibling.previousSibling.previousSibling.textContent;
+        console.log(addressThis);
+  });
+
 };
 
 // search for breweries in a city and state
