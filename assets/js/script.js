@@ -245,8 +245,8 @@ $("ul").on("blur", "textarea", function () {
     // get the parent ul's id attribute
     var status = $(this)
         .closest("ul")
-        // .attr("id")
-        // .replace("list-", "");
+    // .attr("id")
+    // .replace("list-", "");
 
     // // get the task's position in the list of other elements
     // var index = $(this)
@@ -265,34 +265,58 @@ $("ul").on("blur", "textarea", function () {
     $(this).replaceWith(journalP);
 });
 
+$("ul").on("change", "input[type='text']", function () {
+    //get current text
+    var date = $(this)
+        .val()
+        .trim();
+    console.log(date)
+
+    // get the parent ul's id attribute
+    var status = $(this)
+        .closest("ul")
+
+    //recreate span element with bootstrap classes
+    var taskSpan = $("<span>")
+        //   .addClass("badge badge-primary badge-pill")
+        .text(date);
+    console.log(taskSpan)
+
+    //replace input with span element
+    $(this).replaceWith(taskSpan);
+});
+
 //due date was clicked
 $("ul").on("click", "span", function () {
+
+    console.log("boop");
     // get current text
     var date = $(this)
-      .text()
-      .trim();
-  
+        .text()
+        .trim();
+
     //create new input element
     var dateInput = $("<input>")
-      .attr("type", "text")
-    //   .addClass("form-control")
-      .val(date);
-  
+        .attr("type", "text")
+        //   .addClass("form-control")
+        .val(date);
+
     //swap out elements
     $(this).replaceWith(dateInput);
 
     //enable jquery ui datepicker
     dateInput.datepicker({
-      minDate: 1,
-      onClose: function () {
-        //when claendar is closed, force a "change event on the `dateInput`
-        $(this).trigger("change");
-      }
+        minDate: new Date(2007, 1 - 1, 1),
+        onClose: function () {
+            //when claendar is closed, force a "change event on the `dateInput`
+            $(this).trigger("change");
+        }
     })
-  
+
     //automatically focus on new element
     dateInput.trigger("focus");
-  });
+});
+
 
 // event listenr for location search modal journal entries
 document.getElementsByClassName(".address")
