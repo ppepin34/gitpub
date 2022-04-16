@@ -1,5 +1,11 @@
 // container for search modal
-var breweryContainerEl = document.getElementById("brewery-container")
+var breweryContainerEl = document.getElementById("brewery-container");
+
+// container for journal
+var journalContainerEl = document.getElementById("journalContainer");
+
+// array for saved journal entries
+var journalEntries = [];
 
 // locationSearchModal
 const locationSearchModalTarget = document.getElementById("locationSearchModal");
@@ -34,16 +40,49 @@ const optionsLocErr = {
 
 const dismissLocErr = new Dismiss(locationSearchError, optionsLocErr);
 
-var modalExit = function () {
+//
+var locModalExit = function () {
     locationSearchModal.hide()
 };
 
-document.getElementById("locBtn").addEventListener("click", modalExit);
+// create Journal entry
+var createJournal = function (brewery) {
+
+    // create list item
+    var journalEl = document.createElement("li");
+
+    // create header
+    var journalHeader = document.createElement("h3");
+    journalHeader.textContent = brewery;
+
+    // create date
+    var date = document.createElement("span");
+    date.textContent = "Enter a Date";
+    date.classList.add("date")
+
+    // create journal content
+    var journalContent = document.createElement("p");
+    journalContent.textContent = "Tell us what you think about " + brewery;
+
+    // append children to li
+    journalEl.appendChild(journalHeader);
+    journalEl.appendChild(date);
+    journalEl.appendChild(journalContent)
+
+    // append journal entry to container
+    journalContainerEl.appendChild(journalEl)
+
+    locationSearchModal.hide();
+};
+
+var editJournalEntry = function () {
+    console.log("span was clicked")
+}
 
 
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
-    
+
     // clear old content
     breweryContainerEl.textContent = "";
 
@@ -52,7 +91,7 @@ var displayBreweries = function (breweries) {
     for (var i = 0; i < breweries.length; i++) {
 
         // create container for each brewery
-        var breweryEl = document.createElement("div");
+        var breweryEl = document.createElement("li");
 
         // create header for brewery
         var header = document.createElement("h4");
@@ -63,12 +102,12 @@ var displayBreweries = function (breweries) {
         address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
         // + ", " + breweries[i].postal_code;
         address.classList.add("address");
-        
+
         //function display directions (attached to event listener on direction buttons)
         // var directions = document.querySelector(".address")
         // directions => positionstack fetch
-    
-        
+
+
         // type of brewery
         var type = document.createElement("p");
         type.textContent = breweries[i].brewery_type
@@ -82,36 +121,21 @@ var displayBreweries = function (breweries) {
         // create button element to send to journal
         var button = document.createElement("button");
         button.innerHTML = "Click here to add";
+        button.classList.add("breweryBtn")
 
         // create button button to go to directions
         var direction = document.createElement("button");
         direction.classList.add("button");
         direction.innerHTML = "Click here for directions";
+        direction.classList.add("directionBtn")
 
-  
-
-        // add function to go to new URL for directions
-        // document.querySelectorAll(".position").forEach(item => {
-        //     item.addEventListener("click", event => {
-        //         // var address = eventTarget.prevUntil(".address")
-        //         console.log(address);
-        //     });
-        // });
-
-        
-        // $(direction).ready(function(){
-        //     $(direction).click(function(event){
-        //         alert("you've clicked this brewery: " + event.target.nodeName + ",class: ");
-        //     });
-        // });
-   
-          
-          //  window.open('http://google.com');
-             // window.open('http://google.com');
-             // console.log(this.latitude);
-             // });
+        // pass directions
+        document.querySelectorAll('.directionBtn').forEach(item => {
+            console.log
+        })
 
 
+        // append to modal
         breweryEl.appendChild(header);
         breweryEl.appendChild(type);
         breweryEl.appendChild(address);
@@ -122,35 +146,35 @@ var displayBreweries = function (breweries) {
         breweryContainerEl.appendChild(breweryEl)
     };
 
-        $(".button").click(function(e){
+    $(".breweryBtn").click(function (e) {
+        var breweryThis = e.target.previousSibling.previousSibling.previousSibling.previousSibling.textContent;
+        createJournal(breweryThis);
+    });
+    $(".button").click(function (e) {
         // var textAddress = $(".address")[0].innerHTML;
-            var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
-            console.log(breweryAddress);
-
-        
-        var positionURL = "http://api.positionstack.com/v1/forward?access_key=3c901a01e99403584073b5175537c705" + "query=" + breweryAddress;
-
+        var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
+        console.log(breweryAddress);
 
 
         $.ajax({
             url: 'https://api.positionstack.com/v1/forward',
             data: {
-              access_key: '3c901a01e99403584073b5175537c705',
-              query: breweryAddress,
-              limit: 1
+                access_key: '3c901a01e99403584073b5175537c705',
+                query: breweryAddress,
+                limit: 1,
             }
-          }).done(function(data) {
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                var map = map_url;
-                console.log(map);
-            }
-            
-          });
+        }).done(function (data) {
+            console.log(Object.keys(data));
+            var dataArray = Object.values(data);
+            console.log(dataArray);
+            var addressInfo = dataArray[0];
+            console.log(addressInfo);
+            var mapURL = addressInfo[0].map_url;
+            console.log(mapURL);
+            window.open(mapURL)
+        });
     });
 };
-
-    
 
 // search for breweries in a city and state
 $("#location-search").submit(function (event) {
@@ -159,7 +183,6 @@ $("#location-search").submit(function (event) {
     event.preventDefault();
 
     // get info from form
-
     var city = ($("#city").val());
 
     var state = ($("#state").val());
@@ -197,3 +220,107 @@ $("#location-search").submit(function (event) {
         });
 });
 
+// edit journal entries
+$("ul").on("click", "p", function () {
+
+    console.log("this")
+
+    var text = $(this)
+        .text()
+        .trim();
+
+    var textInput = $("<textarea>")
+        .addClass("form-control")
+        .val(text);
+
+    $(this).replaceWith(textInput);
+    textInput.trigger("focus");
+});
+
+$("ul").on("blur", "textarea", function () {
+    // get the textarea's current value/text
+    var text = $(this)
+        .val()
+        .trim();
+
+    // get the parent ul's id attribute
+    var status = $(this)
+        .closest("ul")
+    // .attr("id")
+    // .replace("list-", "");
+
+    // // get the task's position in the list of other elements
+    // var index = $(this)
+    //     .closest(".list-group-item")
+    //     .index();
+
+    // tasks[status][index].text = text;
+    // saveTasks();
+
+    // recreate p element
+    var journalP = $("<p>")
+        //.addClass("m-1")
+        .text(text);
+
+    // replace text area with p element
+    $(this).replaceWith(journalP);
+});
+
+$("ul").on("change", "input[type='text']", function () {
+    //get current text
+    var date = $(this)
+        .val()
+        .trim();
+    console.log(date)
+
+    // get the parent ul's id attribute
+    var status = $(this)
+        .closest("ul")
+
+    //recreate span element with bootstrap classes
+    var taskSpan = $("<span>")
+        //   .addClass("badge badge-primary badge-pill")
+        .text(date);
+    console.log(taskSpan)
+
+    //replace input with span element
+    $(this).replaceWith(taskSpan);
+});
+
+//due date was clicked
+$("ul").on("click", "span", function () {
+
+    console.log("boop");
+    // get current text
+    var date = $(this)
+        .text()
+        .trim();
+
+    //create new input element
+    var dateInput = $("<input>")
+        .attr("type", "text")
+        //   .addClass("form-control")
+        .val(date);
+
+    //swap out elements
+    $(this).replaceWith(dateInput);
+
+    //enable jquery ui datepicker
+    dateInput.datepicker({
+        minDate: new Date(2007, 1 - 1, 1),
+        onClose: function () {
+            //when claendar is closed, force a "change event on the `dateInput`
+            $(this).trigger("change");
+        }
+    })
+
+    //automatically focus on new element
+    dateInput.trigger("focus");
+});
+
+
+// event listenr for location search modal journal entries
+document.getElementsByClassName(".address")
+
+// event listener for location search modal exit button
+document.getElementById("locBtn").addEventListener("click", locModalExit);
