@@ -225,7 +225,7 @@ $("#location-search").submit(function (event) {
 });
 
 // edit journal entries
-$("#journal-container").on("click", "p", function () {
+$("#journalContainer").on("click", "p", function () {
 
     console.log("this")
 
