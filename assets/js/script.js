@@ -50,27 +50,36 @@ var createJournal = function (brewery) {
 
     // create list item
     var journalEl = document.createElement("li");
+    journalEl.classList = ("flex flex-col bg-white rounded-md border-2 p2 m-2");
 
     // create header
     var journalHeader = document.createElement("h3");
     journalHeader.textContent = brewery;
+    journalHeader.classList = ("px-2 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white");
 
     // create date
     var date = document.createElement("span");
     date.textContent = "Enter a Date";
-    date.classList.add("date")
+    date.classList = ("date px-2");
 
     // create journal content
     var journalContent = document.createElement("p");
+    journalContent.classList = ("px-2");
     journalContent.textContent = "Tell us what you think about " + brewery;
+
+    // create delete button
+    var journalDelete = document.createElement("button");
+    journalDelete.classList = ("deleteBtn btn inline-block m-4 px-4 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center");
+    journalDelete.textContent = ("Delete this Entry");
 
     // append children to li
     journalEl.appendChild(journalHeader);
     journalEl.appendChild(date);
-    journalEl.appendChild(journalContent)
+    journalEl.appendChild(journalContent);
+    journalEl.appendChild(journalDelete);
 
     // append journal entry to container
-    journalContainerEl.appendChild(journalEl)
+    journalContainerEl.appendChild(journalEl);
 
     locationSearchModal.hide();
 };
