@@ -105,11 +105,6 @@ var displayBreweries = function (breweries) {
         // + ", " + breweries[i].postal_code;
         address.classList = ("address m-3 p-3");
 
-        //function display directions (attached to event listener on direction buttons)
-        // var directions = document.querySelector(".address")
-        // directions => positionstack fetch
-
-
         // type of brewery
         var type = document.createElement("p");
         type.textContent = "Type: " + breweries[i].brewery_type
@@ -131,7 +126,7 @@ var displayBreweries = function (breweries) {
         var direction = document.createElement("button");
         direction.classList = ("directionBtn btn inline-block m-4 px-4 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center");
         direction.innerHTML = "Click here for directions";
-  
+
 
         // pass directions
         document.querySelectorAll('.directionBtn').forEach(item => {
