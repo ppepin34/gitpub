@@ -92,16 +92,18 @@ var displayBreweries = function (breweries) {
 
         // create container for each brewery
         var breweryEl = document.createElement("li");
+        breweryEl.classList = ("border-2 hover:border-t-4");
 
         // create header for brewery
         var header = document.createElement("h4");
+        header.classList = ("text-center text-2xl underline m-3 p-3 font-bold");
         header.textContent = breweries[i].name;
 
         // create address for brewery
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
         // + ", " + breweries[i].postal_code;
-        address.classList.add("address");
+        address.classList = ("address m-3 p-3");
 
         //function display directions (attached to event listener on direction buttons)
         // var directions = document.querySelector(".address")
@@ -110,24 +112,26 @@ var displayBreweries = function (breweries) {
 
         // type of brewery
         var type = document.createElement("p");
-        type.textContent = breweries[i].brewery_type
+        type.textContent = "Type: " + breweries[i].brewery_type
+        type.classList = ("m-3 p-3 italic")
 
         // create link for website
         var website = document.createElement("a");
         website.setAttribute("href", breweries[i].website_url);
         website.setAttribute("target", "_blank")
         website.textContent = breweries[i].website_url;
+        website.classList = ("m-3 p-3 no-underline hover:underline")
 
         // create button element to send to journal
         var button = document.createElement("button");
         button.innerHTML = "Click here to add";
-        button.classList.add("breweryBtn")
+        button.classList = ("breweryBtn btn inline-block m-4 px-4 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center")
 
         // create button button to go to directions
         var direction = document.createElement("button");
-        direction.classList.add("button");
+        direction.classList = ("directionBtn btn inline-block m-4 px-4 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center");
         direction.innerHTML = "Click here for directions";
-        direction.classList.add("directionBtn")
+  
 
         // pass directions
         document.querySelectorAll('.directionBtn').forEach(item => {
@@ -150,7 +154,7 @@ var displayBreweries = function (breweries) {
         var breweryThis = e.target.previousSibling.previousSibling.previousSibling.previousSibling.textContent;
         createJournal(breweryThis);
     });
-    $(".button").click(function (e) {
+    $(".directionBtn").click(function (e) {
         // var textAddress = $(".address")[0].innerHTML;
         var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
         console.log(breweryAddress);
@@ -221,7 +225,7 @@ $("#location-search").submit(function (event) {
 });
 
 // edit journal entries
-$("ul").on("click", "p", function () {
+$("#journal-container").on("click", "p", function () {
 
     console.log("this")
 
