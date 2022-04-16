@@ -326,6 +326,10 @@ $("ul").on("click", "span", function () {
     dateInput.trigger("focus");
 });
 
+$("#journalContainer").on("click", ".deleteBtn", function () {
+
+    this.parentElement.remove();
+});
 
 // event listenr for location search modal journal entries
 document.getElementsByClassName(".address")
