@@ -1,13 +1,12 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 
 body {
-  background-image: url(./assets/images/beer-border.png);
+  background-image: url(../../assets/images/beer-border.png);
   background-repeat: no-repeat;
   background-size: 70vw;
-  background-position:unset;
 }
 
 
