@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+  background-image: url(/assets/images/beer-border.png);
+  background-repeat: no-repeat;
+  background-size: 70vw;
+  background-position:unset;
+}
+
+
+
+#main-header {
+  font-family: Georgia, sans-serif;
+  font-size: 5em;
+  letter-spacing: -2px;
+}
+
+/* footer {
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100vw;
+} */    
+
