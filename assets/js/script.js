@@ -337,11 +337,13 @@ $("#journalContainer").on("click", "span", function () {
 });
 
 var loadJournals = function () {
-    journalEntries = JSON.parse(localStorage.getItem("journalEntries"));
+
+    let entriesPresent = localStorage.getItem("journalEntries");
+    journalEntries = JSON.parse(entriesPresent ?? '[]');
 
     // if nothing in localStorage, end function
     if (!journalEntries) {
-        return
+        return;
     };
 
     // loop over object properties
