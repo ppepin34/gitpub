@@ -325,6 +325,7 @@ $("#journalContainer").on("click", "span", function () {
     //enable jquery ui datepicker
     dateInput.datepicker({
         minDate: new Date(2007, 1 - 1, 1),
+        classList: ("bg-gray-200 border-2"),
         onClose: function () {
             //when claendar is closed, force a "change event on the `dateInput`
             $(this).trigger("change");
