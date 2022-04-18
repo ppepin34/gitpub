@@ -45,7 +45,12 @@ var locModalExit = function () {
     locationSearchModal.hide()
 };
 
-// create Journal entry
+// save journal entries
+var saveJournals = function () {
+    localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
+};
+
+// create Journal entry from newly selected brewery
 var createJournal = function (brewery) {
 
     // create list item
@@ -81,13 +86,18 @@ var createJournal = function (brewery) {
     // append journal entry to container
     journalContainerEl.appendChild(journalEl);
 
+    var arrayObject = {
+        brewery: brewery,
+        date: date.textContent,
+        journal: journalContent.textContent
+    };
+
+    journalEntries.push(arrayObject);
+
+    saveJournals();
+
     locationSearchModal.hide();
 };
-
-var editJournalEntry = function () {
-    console.log("span was clicked")
-}
-
 
 // display list of breweries in modal
 var displayBreweries = function (breweries) {
@@ -111,18 +121,17 @@ var displayBreweries = function (breweries) {
         // create address for brewery
         var address = document.createElement("p");
         address.innerHTML = breweries[i].street + ", <br>" + breweries[i].city + " " + breweries[i].state;
-        // + ", " + breweries[i].postal_code;
         address.classList = ("address m-3 p-3");
 
         // type of brewery
         var type = document.createElement("p");
         type.textContent = "Type: " + breweries[i].brewery_type
-        type.classList = ("m-3 p-3 italic")
+        type.classList = ("m-3 p-3 italic");
 
         // create link for website
         var website = document.createElement("a");
         website.setAttribute("href", breweries[i].website_url);
-        website.setAttribute("target", "_blank")
+        website.setAttribute("target", "_blank");
         website.textContent = breweries[i].website_url;
         website.classList = ("m-3 p-3 no-underline hover:underline")
 
@@ -159,7 +168,6 @@ var displayBreweries = function (breweries) {
         createJournal(breweryThis);
     });
     $(".directionBtn").click(function (e) {
-        // var textAddress = $(".address")[0].innerHTML;
         var breweryAddress = e.target.previousSibling.previousSibling.previousSibling.textContent;
         console.log(breweryAddress);
 
@@ -231,8 +239,6 @@ $("#location-search").submit(function (event) {
 // edit journal entries
 $("#journalContainer").on("click", "p", function () {
 
-    console.log("this")
-
     var text = $(this)
         .text()
         .trim();
@@ -245,58 +251,60 @@ $("#journalContainer").on("click", "p", function () {
     textInput.trigger("focus");
 });
 
-$("ul").on("blur", "textarea", function () {
+$("#journalContainer").on("blur", "textarea", function () {
     // get the textarea's current value/text
     var text = $(this)
         .val()
         .trim();
 
-    // get the parent ul's id attribute
-    var status = $(this)
-        .closest("ul")
-    // .attr("id")
-    // .replace("list-", "");
+    //get position in list
+    var index = $(this)
+        .closest("li")
+        .index();
 
-    // // get the task's position in the list of other elements
-    // var index = $(this)
-    //     .closest(".list-group-item")
-    //     .index();
+        console.log(index)
 
-    // tasks[status][index].text = text;
-    // saveTasks();
+    // journalEntries[index].journal = text;
+    // saveJournals;
 
     // recreate p element
     var journalP = $("<p>")
-        //.addClass("m-1")
-        .text(text);
+    journalP.text(text);
+    journalP.classList = ("px-2");
 
     // replace text area with p element
     $(this).replaceWith(journalP);
 });
 
-$("ul").on("change", "input[type='text']", function () {
+$("#journalContainer").on("change", "input[type='text']", function () {
     //get current text
     var date = $(this)
         .val()
         .trim();
-    console.log(date)
 
-    // get the parent ul's id attribute
-    var status = $(this)
-        .closest("ul")
+        console.log(date);
+
+    //get position in list
+    var index = $(this)
+        .closest("li")
+        .index();
+
+        console.log(index);
+
+    journalEntries[index].date = date;
+    saveJournals;
 
     //recreate span element with bootstrap classes
-    var taskSpan = $("<span>")
-        //   .addClass("badge badge-primary badge-pill")
-        .text(date);
-    console.log(taskSpan)
+    var dateSpan = $("<span>")
+    dateSpan.text(date);
+    dateSpan.classlist = ("date px-2");
 
     //replace input with span element
-    $(this).replaceWith(taskSpan);
+    $(this).replaceWith(dateSpan);
 });
 
-//due date was clicked
-$("ul").on("click", "span", function () {
+// visit date was clicked
+$("#journalContainer").on("click", "span", function () {
 
     console.log("boop");
     // get current text
@@ -307,7 +315,6 @@ $("ul").on("click", "span", function () {
     //create new input element
     var dateInput = $("<input>")
         .attr("type", "text")
-        //   .addClass("form-control")
         .val(date);
 
     //swap out elements
@@ -326,13 +333,60 @@ $("ul").on("click", "span", function () {
     dateInput.trigger("focus");
 });
 
+var loadJournals = function() {
+    journalEntries = JSON.parse(localStorage.getItem("journalEntries"));
+  
+    // if nothing in localStorage, end function
+    if (!journalEntries) {
+      return
+    };
+  
+    // loop over object properties
+    $.each(journalEntries, function(brewery, date, journal) {
+      console.log(brewery, date, journal);
+      // then loop over sub-array
+    //   arr.forEach(function(task) {// create list item
+        // var journalEl = document.createElement("li");
+        // journalEl.classList = ("flex flex-col bg-white rounded-md border-2 p2 m-2");
+    
+        // // create header
+        // var journalHeader = document.createElement("h3");
+        // journalHeader.textContent = brewery;
+        // journalHeader.classList = ("px-2 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white");
+    
+        // // create date
+        // var date = document.createElement("span");
+        // date.textContent = "Enter a Date";
+        // date.classList = ("date px-2");
+    
+        // // create journal content
+        // var journalContent = document.createElement("p");
+        // journalContent.classList = ("px-2");
+        // journalContent.textContent = "Tell us what you think about " + brewery;
+    
+        // // create delete button
+        // var journalDelete = document.createElement("button");
+        // journalDelete.classList = ("deleteBtn btn inline-block m-4 px-4 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center");
+        // journalDelete.textContent = ("Delete this Entry");
+    
+        // // append children to li
+        // journalEl.appendChild(journalHeader);
+        // journalEl.appendChild(date);
+        // journalEl.appendChild(journalContent);
+        // journalEl.appendChild(journalDelete);
+    
+        // // append journal entry to container
+        // journalContainerEl.appendChild(journalEl);
+    //   });
+    });
+  };
+  
+
 $("#journalContainer").on("click", ".deleteBtn", function () {
 
+    //journa
     this.parentElement.remove();
 });
-
-// event listenr for location search modal journal entries
-document.getElementsByClassName(".address")
 
 // event listener for location search modal exit button
 document.getElementById("locBtn").addEventListener("click", locModalExit);
