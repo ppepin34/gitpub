@@ -55,7 +55,7 @@ var createJournal = function (brewery) {
 
     // create list item
     var journalEl = document.createElement("li");
-    journalEl.classList = ("flex flex-col bg-white rounded-md border-2 p2 m-2");
+    journalEl.classList = ("flex flex-col bg-white rounded-md border-2 p2 m-2 entry-container");
 
     // create header
     var journalHeader = document.createElement("h3");
@@ -262,10 +262,11 @@ $("#journalContainer").on("blur", "textarea", function () {
         .closest("li")
         .index();
 
-        console.log(index)
-
-    // journalEntries[index].journal = text;
-    // saveJournals;
+    // update array with text
+    journalEntries[index].journal = text;
+    
+    // save entry
+    saveJournals();
 
     // recreate p element
     var journalP = $("<p>")
@@ -289,10 +290,11 @@ $("#journalContainer").on("change", "input[type='text']", function () {
         .closest("li")
         .index();
 
-        console.log(index);
-
+    // save date in index position
     journalEntries[index].date = date;
-    saveJournals;
+
+    // update array in localStorage
+    saveJournals();
 
     //recreate span element with bootstrap classes
     var dateSpan = $("<span>")
@@ -381,11 +383,22 @@ var loadJournals = function() {
     });
   };
   
-
+// delete button
 $("#journalContainer").on("click", ".deleteBtn", function () {
 
-    //journa
+    // get index of li
+    var index = $(this)
+        .closest("li")
+        .index();
+
+    // delete from array
+    journalEntries.splice(index)
+
+    // journal element removed from page
     this.parentElement.remove();
+
+    // update localStorage
+    saveJournals();
 });
 
 // event listener for location search modal exit button
