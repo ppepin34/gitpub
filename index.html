@@ -7,19 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
     <link rel="stylesheet" href="./assets/css/tailwind.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <!-- https://api.openbrewerydb.org/ -->
     <title>GitPub</title>
 </head>
 
 <body class="bg-flax">
-    <header class="flex m-4">
-        <h1 class="text-4xl font-bold">GitPub</h1>
+
+    <header class="flex m-4" id="main-picture">
+        <div class="text-4xl font-bold" id="main-header">GitPub</div>
     </header>
 
-    <main class="flex flex-wrap justify-evenly">
-
+    <main class="flex flex-wrap justify-evenly" id="main-background">
+        
         <!-- search bars -->
-        <div class="m-8 basis-1 w-full border-2 border-dark-gray rounded-md min-w-1/3" id="search-bar-area">
+        <div class="m-8 basis-1 w-full border-2 border-dark-gray rounded-md min-w-1/3 max-h-min" id="search-bar-area">
             <h2 class="text-2xl font-bold">Search for Breweries</h2>
 
             <!-- search by location -->
@@ -96,7 +98,7 @@
         </div>
 
         <!-- list for journal entries -->
-        <div class="flex flex-col m-8 basis-1 min-w-[50%]">
+        <div class="flex flex-col m-8 basis-1 min-w-[50%]" id="journal-background">
             <h2 class="text-2xl font-bold m-2">My Brewery Trips:</h2>
             <ul id="journalContainer">
 
@@ -163,8 +165,9 @@
             </svg>
         </button>
     </div>
-
-    <footer></footer>
+    <footer id="footer">
+        
+    </footer>
 </body>
 
 <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
