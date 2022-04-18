@@ -1,0 +1,23 @@
+{
+  "name": "gitpub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppepin34/gitpub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ppepin34/gitpub/issues"
+  },
+  "homepage": "https://github.com/ppepin34/gitpub#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.0.23"
+  }
+}
