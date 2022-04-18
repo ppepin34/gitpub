@@ -341,7 +341,6 @@ var loadJournals = function () {
 
     // if nothing in localStorage, end function
     if (!journalEntries) {
-        console.log("this is a test")
         return
     };
 
