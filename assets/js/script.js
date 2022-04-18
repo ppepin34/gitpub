@@ -6,7 +6,6 @@ var journalContainerEl = document.getElementById("journalContainer");
 
 // array for saved journal entries
 var journalEntries = [];
-console.log(journalEntries)
 
 // locationSearchModal
 const locationSearchModalTarget = document.getElementById("locationSearchModal");
@@ -297,7 +296,7 @@ $("#journalContainer").on("change", "input[type='text']", function () {
     // update array in localStorage
     saveJournals();
 
-    //recreate span element with bootstrap classes
+    //recreate span element
     var dateSpan = $("<span>")
     dateSpan.text(date);
     dateSpan.classlist = ("date px-2");
@@ -342,7 +341,6 @@ var loadJournals = function () {
 
     // if nothing in localStorage, end function
     if (!journalEntries) {
-        console.log("this is a test")
         return
     };
 
